@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Movie List</string>
+    <string name="movie">Movies</string>
+    <string name="tvshow">TV Shows</string>
+    <string name="title_activity_detail_film">Detail Film Activity</string>
+    <string name="credits">Credit: Bramantio Krisno Aji</string>
+
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="year">year</string>
+    <string name="description_film">Overview</string>
+    <string name="description">lorem ipsum</string>
+    <string name="genre_film">Genre</string>
+    <string name="genre">genre</string>
+    <string name="rating">rating</string>
+    <string name="duration">duration</string>
+    <string name="menu_favorite">menu favorite</string>
+    <string name="favorite_activity">activity favorite</string>
+    <string name="favorite">favorite</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_ok">OK</string>
+    <string name="message_undo">Cancel delete item</string>
+</resources>
