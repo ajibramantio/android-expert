@@ -86,7 +86,7 @@ class RemoteDataSource(private val remoteDataSource: ApiService) {
        return flow {
            try{
                val filmResponse = remoteDataSource.getFilm(id)
-               var film: FilmEntity
+               val film: FilmEntity
                film =
                    FilmEntity(
                        filmResponse.id,
@@ -112,7 +112,7 @@ class RemoteDataSource(private val remoteDataSource: ApiService) {
         return flow {
             try{
                 val filmResponse = remoteDataSource.getTvShow(id)
-                var film: FilmEntity
+                val film: FilmEntity
                 film =
                     FilmEntity(
                         filmResponse.id,

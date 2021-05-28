@@ -7,7 +7,7 @@ import com.dicoding.core.data.source.local.entity.FilmEntity
 import com.dicoding.core.utils.DataConverter
 
 @Database(entities = [FilmEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 
 @TypeConverters(DataConverter::class)

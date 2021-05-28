@@ -24,8 +24,6 @@ class FilmFavoriteAdapter: RecyclerView.Adapter<FilmFavoriteAdapter.FilmViewHold
         return FilmViewHolder(itemsFilmBinding)
     }
 
-
-
     fun getSwipedData(swipedPosition: Int): Film = listData[swipedPosition]
 
     class FilmViewHolder(private val binding: ItemsFilmBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,6 +31,7 @@ class FilmFavoriteAdapter: RecyclerView.Adapter<FilmFavoriteAdapter.FilmViewHold
             with(binding) {
                 tvItemTitle.text = film.title
                 tvItemDate.text =film.releaseYear
+
                 Glide.with(itemView.context)
                     .load(film.photo)
                     .apply(
@@ -45,7 +44,7 @@ class FilmFavoriteAdapter: RecyclerView.Adapter<FilmFavoriteAdapter.FilmViewHold
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         val film = listData[position]
-        if(film !=null){
+        if(film != null){
             holder.bind(film)
         }
     }
@@ -53,6 +52,4 @@ class FilmFavoriteAdapter: RecyclerView.Adapter<FilmFavoriteAdapter.FilmViewHold
     override fun getItemCount(): Int {
        return listData.size
     }
-
-
 }

@@ -28,7 +28,7 @@ class TvShowFavoriteAdapter: RecyclerView.Adapter<TvShowFavoriteAdapter.TvShowVi
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
         val film = listData[position]
-        if(film !=null){
+        if(film != null){
             holder.bind(film)
         }
     }

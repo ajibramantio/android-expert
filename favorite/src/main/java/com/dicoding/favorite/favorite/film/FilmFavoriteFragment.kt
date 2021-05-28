@@ -15,38 +15,40 @@ import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FilmFavoriteFragment : Fragment() {
-    private lateinit var fragmentFilmFavoriteBinding: FragmentFilmFavoriteBinding
+
+    private lateinit var _fragmentFilmFavoriteBinding: FragmentFilmFavoriteBinding
     private val viewModel: FilmFavoriteViewModel by viewModel()
     private lateinit var filmAdapter: FilmFavoriteAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        fragmentFilmFavoriteBinding = FragmentFilmFavoriteBinding.inflate(layoutInflater, container, false)
-        return fragmentFilmFavoriteBinding.root
+        _fragmentFilmFavoriteBinding = FragmentFilmFavoriteBinding.inflate(layoutInflater, container, false)
+        return _fragmentFilmFavoriteBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        itemTouchHelper.attachToRecyclerView(fragmentFilmFavoriteBinding.rvFilmFavorite)
+        itemTouchHelper.attachToRecyclerView(_fragmentFilmFavoriteBinding.rvFilmFavorite)
         if (activity != null) {
 
             filmAdapter = FilmFavoriteAdapter()
-            fragmentFilmFavoriteBinding.progressBarFavorite.visibility = View.VISIBLE
+            _fragmentFilmFavoriteBinding.progressBarFavorite.visibility = View.VISIBLE
             viewModel.getFavoriteFilm().observe(this, Observer{ films ->
-                if(films !=null){
-                    fragmentFilmFavoriteBinding.progressBarFavorite.visibility = View.GONE
+                if(films != null){
+                    _fragmentFilmFavoriteBinding.progressBarFavorite.visibility = View.GONE
                     filmAdapter.setData(films)
                     filmAdapter.notifyDataSetChanged()
                 }
 
             })
 
-            with(fragmentFilmFavoriteBinding.rvFilmFavorite) {
+            with(_fragmentFilmFavoriteBinding.rvFilmFavorite) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = filmAdapter
             }
         }
     }
+
     private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
         override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int =
             makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
@@ -57,7 +59,7 @@ class FilmFavoriteFragment : Fragment() {
             if (view != null) {
                 val swipedPosition = viewHolder.adapterPosition
                 val filmEntity = filmAdapter.getSwipedData(swipedPosition)
-                    filmEntity?.let { viewModel.setFavorite(it) }
+                filmEntity?.let { viewModel.setFavorite(it) }
                 val snackbar = Snackbar.make(view as View, R.string.message_undo, Snackbar.LENGTH_LONG)
                 snackbar.setAction(R.string.message_ok) { v ->
                     filmEntity?.let { viewModel.setFavorite(it) }

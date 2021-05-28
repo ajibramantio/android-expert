@@ -1,4 +1,4 @@
-package com.dicoding.myfavoriteapp.favorite.ui.favorite.tvshow
+package com.dicoding.favorite.favorite.tvshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

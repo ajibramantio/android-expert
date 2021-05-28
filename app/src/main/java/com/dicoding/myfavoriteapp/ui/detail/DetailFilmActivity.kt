@@ -25,7 +25,7 @@ class DetailFilmActivity : AppCompatActivity() {
         const val EXTRA_TYPE = "extra_type"
     }
 
-    private lateinit var detailContentBinding: ContentDetailFilmBinding
+    private lateinit var _detailContentBinding: ContentDetailFilmBinding
     private var menu: Menu? = null
     private var type: String? = null
     private val viewModel: DetailFilmViewModel by viewModel()
@@ -34,7 +34,7 @@ class DetailFilmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val activityDetailFilmBinding = ActivityDetailFilmBinding.inflate(layoutInflater)
-        detailContentBinding = activityDetailFilmBinding.detailContent
+        _detailContentBinding = activityDetailFilmBinding.detailContent
 
         setContentView(activityDetailFilmBinding.root)
 
@@ -50,13 +50,13 @@ class DetailFilmActivity : AppCompatActivity() {
                     viewModel.getFilm.observe(this, Observer{ film ->
                         if(film!=null){
                             when(film.status){
-                                Status.LOADING ->  detailContentBinding.progressBar.visibility = View.VISIBLE
+                                Status.LOADING ->  _detailContentBinding.progressBar.visibility = View.VISIBLE
                                 Status.SUCCESS -> if (film.data != null) {
-                                    detailContentBinding.progressBar.visibility = View.GONE
+                                    _detailContentBinding.progressBar.visibility = View.GONE
                                     populateFilm(film.data!!)
                                 }
                                 Status.ERROR ->   {
-                                    detailContentBinding.progressBar.visibility = View.GONE
+                                    _detailContentBinding.progressBar.visibility = View.GONE
                                     Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                                 }
                             }
@@ -67,13 +67,13 @@ class DetailFilmActivity : AppCompatActivity() {
                     viewModel.getTvShow.observe(this, Observer{ film ->
                         if(film != null){
                             when(film.status){
-                                Status.LOADING ->  detailContentBinding.progressBar.visibility = View.VISIBLE
+                                Status.LOADING ->  _detailContentBinding.progressBar.visibility = View.VISIBLE
                                 Status.SUCCESS -> if (film.data != null) {
-                                    detailContentBinding.progressBar.visibility = View.GONE
+                                    _detailContentBinding.progressBar.visibility = View.GONE
                                     populateFilm(film.data!!)
                                 }
                                 Status.ERROR ->   {
-                                    detailContentBinding.progressBar.visibility = View.GONE
+                                    _detailContentBinding.progressBar.visibility = View.GONE
                                     Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                                 }
                             }
@@ -91,12 +91,12 @@ class DetailFilmActivity : AppCompatActivity() {
             genre.append(i.name.toString()).append(" ")
         }
 
-        detailContentBinding.apply {
+        _detailContentBinding.apply {
             textTitle.text = film.title
             textDescription.text = film.overview
             textGenrefilm.text = genre.toString()
-            (film.imdbScore.toString()+"/10").also { textRating.text = it }
-            textDuration.text = if (film.duration==0) "-"  else film.duration.toString()+"m"
+            (film.imdbScore.toString()+"/10").also { textRating.text = "rating: $it" }
+            textDuration.text = if (film.duration == 0) "duration: -"  else "duration: " + film.duration.toString() + "minutes"
             textDate.text = film.releaseYear
 
             Glide.with(this@DetailFilmActivity)
@@ -110,20 +110,20 @@ class DetailFilmActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_favorite, menu)
+        menuInflater.inflate(R.menu.menu_favorite, menu)
         this.menu = menu
         if(type == "film"){
             viewModel.getFilm.observe(this, Observer{ film ->
                 if(film!=null){
                     when(film.status){
-                        Status.LOADING ->  detailContentBinding.progressBar.visibility = View.VISIBLE
+                        Status.LOADING ->  _detailContentBinding.progressBar.visibility = View.VISIBLE
                         Status.SUCCESS -> if (film.data != null) {
-                            detailContentBinding.progressBar.visibility = View.GONE
+                            _detailContentBinding.progressBar.visibility = View.GONE
                             val state = film.data!!.favorited
                             setFavoriteState(state)
                         }
                         Status.ERROR ->   {
-                            detailContentBinding.progressBar.visibility = View.GONE
+                            _detailContentBinding.progressBar.visibility = View.GONE
                             Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -134,14 +134,14 @@ class DetailFilmActivity : AppCompatActivity() {
             viewModel.getTvShow.observe(this, Observer{ film ->
                 if(film!=null){
                     when(film.status){
-                        Status.LOADING ->  detailContentBinding.progressBar.visibility = View.VISIBLE
+                        Status.LOADING ->  _detailContentBinding.progressBar.visibility = View.VISIBLE
                         Status.SUCCESS -> if (film.data != null) {
-                            detailContentBinding.progressBar.visibility = View.GONE
+                            _detailContentBinding.progressBar.visibility = View.GONE
                             val state = film.data!!.favorited
                             setFavoriteState(state)
                         }
                         Status.ERROR ->   {
-                            detailContentBinding.progressBar.visibility = View.GONE
+                            _detailContentBinding.progressBar.visibility = View.GONE
                             Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -153,13 +153,12 @@ class DetailFilmActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_favorite) {
-            if(type=="film"){
+            if(type == "film"){
                 viewModel.setFavoriteFilm()
             }
             else{
                 viewModel.setFavoriteTv()
             }
-
             return true
         }
         return super.onOptionsItemSelected(item)

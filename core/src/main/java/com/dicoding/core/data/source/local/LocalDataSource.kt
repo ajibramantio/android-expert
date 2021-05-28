@@ -24,5 +24,4 @@ class LocalDataSource(private val mFilmDao: FilmDao) {
         mFilmDao.updateFilm(film)
     }
 
-
 }

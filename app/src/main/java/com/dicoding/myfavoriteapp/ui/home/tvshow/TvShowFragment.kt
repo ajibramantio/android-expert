@@ -13,11 +13,11 @@ import com.dicoding.core.vo.Status
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
-    private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
+    private lateinit var _fragmentTvShowBinding: FragmentTvShowBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
-        return fragmentTvShowBinding.root
+        _fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        return _fragmentTvShowBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,22 +30,22 @@ class TvShowFragment : Fragment() {
             viewModel.getTvShow().observe(this, Observer{ films ->
                 if(films !=null){
                     when(films.status){
-                        Status.LOADING ->   fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
+                        Status.LOADING ->   _fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
                         Status.SUCCESS ->{
-                            fragmentTvShowBinding.progressBar.visibility = View.GONE
+                            _fragmentTvShowBinding.progressBar.visibility = View.GONE
                             tvShowAdapter.setData(films.data)
                            tvShowAdapter.notifyDataSetChanged()
 
                         }
                         Status.ERROR->{
-                            fragmentTvShowBinding.progressBar.visibility = View.GONE
+                            _fragmentTvShowBinding.progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             })
 
-            with(fragmentTvShowBinding.rvTvshow) {
+            with(_fragmentTvShowBinding.rvTvshow) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = tvShowAdapter

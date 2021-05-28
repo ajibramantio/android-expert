@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.myfavoriteapp.R
 import com.dicoding.myfavoriteapp.favorite.databinding.FragmentTvShowFavoriteBinding
-import com.dicoding.myfavoriteapp.favorite.ui.favorite.tvshow.TvShowFavoriteViewModel
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -32,12 +31,11 @@ class TvShowFavoriteFragment : Fragment() {
             tvShowAdapter = TvShowFavoriteAdapter()
             _fragmentTvShowFavoriteBinding.progressBarFavorite.visibility = View.VISIBLE
             viewModel.getTvShowFavorite().observe(this, Observer{ films ->
-                if(films !=null){
+                if(films != null){
                     _fragmentTvShowFavoriteBinding.progressBarFavorite.visibility = View.GONE
                     tvShowAdapter.setData(films)
                     tvShowAdapter.notifyDataSetChanged()
                 }
-
             })
 
             with(_fragmentTvShowFavoriteBinding.rvTvshowFavorite) {
@@ -50,9 +48,7 @@ class TvShowFavoriteFragment : Fragment() {
     private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
         override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int =
             makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
-
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean = true
-
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             if (view != null) {
                 val swipedPosition = viewHolder.adapterPosition
@@ -67,3 +63,24 @@ class TvShowFavoriteFragment : Fragment() {
         }
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

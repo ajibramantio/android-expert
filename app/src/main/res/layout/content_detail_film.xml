@@ -23,29 +23,33 @@
         android:id="@+id/text_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/text_date"
-        app:layout_constraintTop_toBottomOf="@id/text_date"
+        app:layout_constraintTop_toBottomOf="@+id/image_poster"
         tools:text="@string/title" />
 
     <TextView
         android:id="@+id/text_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:gravity="start"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_poster"
-        tools:text="@string/dateline" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title"
+        tools:text="@string/date" />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_title">
+        app:layout_constraintTop_toBottomOf="@+id/text_date">
+
         <TextView
             android:id="@+id/text_rating"
             android:layout_width="wrap_content"
@@ -53,17 +57,17 @@
             android:layout_marginTop="10dp"
             android:gravity="start"
             android:textSize="14sp"
-
             tools:text="@string/rating" />
+
         <TextView
             android:id="@+id/text_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/text_rating"
             android:gravity="start"
             android:textSize="14sp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_toRightOf="@id/text_rating"
             tools:text="@string/duration" />
 
     </RelativeLayout>
@@ -72,15 +76,15 @@
         android:id="@+id/text_genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:text="@string/genre_film"
         android:textColor="@color/teal_700"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <TextView
         android:id="@+id/text_genrefilm"

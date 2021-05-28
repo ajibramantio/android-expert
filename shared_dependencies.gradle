@@ -21,7 +21,6 @@ dependencies{
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
-
     //testing
     testImplementation "androidx.arch.core:core-testing:$androidCoreTestVersion"
     testImplementation "junit:junit:$junitVersion"

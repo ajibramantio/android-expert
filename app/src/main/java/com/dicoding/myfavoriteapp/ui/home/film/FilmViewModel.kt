@@ -8,6 +8,6 @@ import com.dicoding.core.domain.usecase.FilmUseCase
 import com.dicoding.core.vo.Resource
 
 class FilmViewModel(private val filmUseCase: FilmUseCase): ViewModel() {
-    fun getFilm(): LiveData<Resource<List<Film>>> = filmUseCase.getAllFilm().asLiveData()
 
+    fun getFilm(): LiveData<Resource<List<Film>>> = filmUseCase.getAllFilm().asLiveData()
 }

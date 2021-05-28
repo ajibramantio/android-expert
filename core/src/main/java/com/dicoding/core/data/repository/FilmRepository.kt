@@ -31,7 +31,7 @@ class FilmRepository(private val remoteDataSource: RemoteDataSource,
                 remoteDataSource.getAllFilm()
 
             override suspend  fun saveCallResult(data: List<FilmEntity>) {
-                localDataSource.insertFilm(data)
+                appExecutors.diskIO().execute { localDataSource.insertFilm(data) }
             }
 
         }.asFlow()
@@ -51,9 +51,8 @@ class FilmRepository(private val remoteDataSource: RemoteDataSource,
                 remoteDataSource.getAllTvShow()
 
             override suspend fun saveCallResult(data: List<FilmEntity>) {
-                localDataSource.insertFilm(data)
+                appExecutors.diskIO().execute { localDataSource.insertFilm(data) }
             }
-
         }.asFlow()
     }
 

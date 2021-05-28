@@ -8,6 +8,7 @@ import com.dicoding.favorite.di.favoritesModule
 
 class HomeFavoriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         val activityHomeFavoriteBinding = ActivityHomeFavoriteBinding.inflate(layoutInflater)
         setContentView(activityHomeFavoriteBinding.root)

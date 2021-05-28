@@ -16,11 +16,11 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class FilmFragment : Fragment() {
-    private lateinit var fragmentFilmBinding: FragmentFilmBinding
+    private lateinit var _fragmentFilmBinding: FragmentFilmBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        fragmentFilmBinding = FragmentFilmBinding.inflate(layoutInflater, container, false)
-        return fragmentFilmBinding.root
+        _fragmentFilmBinding = FragmentFilmBinding.inflate(layoutInflater, container, false)
+        return _fragmentFilmBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,15 +33,15 @@ class FilmFragment : Fragment() {
                 if(films !=null){
                     Log.d("DATA_FILM",films.status.toString())
                     when(films.status){
-                        Status.LOADING ->   fragmentFilmBinding.progressBar.visibility = View.VISIBLE
+                        Status.LOADING ->   _fragmentFilmBinding.progressBar.visibility = View.VISIBLE
                         Status.SUCCESS ->{
-                            fragmentFilmBinding.progressBar.visibility = View.GONE
+                            _fragmentFilmBinding.progressBar.visibility = View.GONE
                             filmAdapter.setData(films.data)
                             filmAdapter.notifyDataSetChanged()
 
                         }
                         Status.ERROR->{
-                            fragmentFilmBinding.progressBar.visibility = View.GONE
+                            _fragmentFilmBinding.progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
 
                         }
@@ -51,7 +51,7 @@ class FilmFragment : Fragment() {
 
             })
 
-            with(fragmentFilmBinding.rvFilm) {
+            with(_fragmentFilmBinding.rvFilm) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = filmAdapter

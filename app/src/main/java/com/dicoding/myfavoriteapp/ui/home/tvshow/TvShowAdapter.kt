@@ -44,6 +44,7 @@ class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                     intent.putExtra(DetailFilmActivity.EXTRA_TYPE, "tvshow")
                     itemView.context.startActivity(intent)
                 }
+
                 Glide.with(itemView.context)
                     .load(film.photo)
                     .apply(
