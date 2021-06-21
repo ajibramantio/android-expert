@@ -1,0 +1,4 @@
+rootProject.name = "MyFavoriteApp"
+include ':app'
+include ':core'
+include ':favorite'
